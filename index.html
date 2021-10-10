@@ -1,0 +1,52 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTTP Video Stream</title>
+</head>
+
+<body>
+ 
+  <input type="range"  style="width: 100%;" name="" id="range">
+
+
+
+</body>
+
+<script>
+  let audio = new Audio()
+ 
+
+  let range = document.getElementById('range')
+  range.min=0;
+ 
+  audio.onloadedmetadata = function () {
+    range.max=audio.duration;
+   
+  };
+  audio.ontimeupdate = function(){
+    
+  }
+
+  audio.src = "http://localhost:3000/getAudio?url=https://www.youtube.com/watch?v=_blLvIP58_4&ab_channel=ArcticEmpire"
+  console.log(audio.readyState);
+  audio.play()
+  console.log(audio.currentTime);
+ 
+
+
+  range.onclick = (e)=>{
+    if(range.value>0){
+      let value = parseFloat(range.value)
+      audio.currentTime=value;
+    }
+      
+  }
+
+  setInterval(()=>{
+    range.value=audio.currentTime
+  })
+</script>
+
+</html>
