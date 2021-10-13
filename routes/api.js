@@ -15,23 +15,29 @@ async function getResult(search, resultType = 0) {
 module.exports = function (app) {
 
     app.get("/api/search", async (req, res) => {
+
+
         let keyword = req.query.keyword
         let type = req.query.type;
- console.log("yes");
+        console.log("yes");
         if (!keyword) {
             res.status(404).send("no keyword supplied")
             return;
         }
         type = !type || type > 1 ? 0 : type;
 
-        let result = await ytScrape.search(keyword, { type })
+        let result = await ytScrape.search(keyword, {
+            type, requestOptions: {
+                headers: { 'Accept-Language': 'en-US,en;q=0.5' }
+            }
+        })
         res.json(result)
 
 
 
     })
 
-    app.get('/api/getAudio',  (req, res) => {
+    app.get('/api/getAudio', (req, res) => {
 
         let url = req.query.url;
         const range = req.headers.range || "bytes=0-";
