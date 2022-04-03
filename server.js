@@ -9,12 +9,6 @@ const routes = require('./routes/api')(app)
 
 
 
-
-
-
-
-
-
 const PORT = process.env.PORT || 3000
 app.listen(PORT)
 console.log("your app is listning to port :" + PORT)

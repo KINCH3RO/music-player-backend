@@ -6,6 +6,7 @@ async function getResult(search, resultType = 0) {
     let type = resultType == 0 ? "video" : "channel"
 
     let result = await ytScrape.search(search, { type })
+
     return result
 
 
@@ -70,7 +71,7 @@ module.exports = function (app) {
 
 
 
-        ytdl(url, { quality: 'highestaudio', range: { start: start, end: end } }).pipe(res)
+        ytdl("url", { quality: 'highestaudio', range: { start: start, end: end } }).pipe(res)
 
 
     })
